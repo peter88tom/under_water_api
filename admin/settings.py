@@ -120,3 +120,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+WEATHER_API_KEY1='aeede80a8cb9acc8c97a5380788401ab'

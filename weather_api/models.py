@@ -5,6 +5,8 @@ from django.db import models
 
 class Period(models.Model):
 	period_name = models.CharField(max_length=250, null=True, blank=True)
+	def __str__(self):
+		return self.period_name
 
 
 class WeatherRecord(models.Model):

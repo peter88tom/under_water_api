@@ -28,12 +28,16 @@
          <form class="form-inline" action="{% url 'default-page' %}" method="POST" id="WeatherForm">
       {% csrf_token %}
       <div class="form-group mb-2">
-        <label for="staticEmail2" class="">City</label>
+        <label for="city" class="">City</label>
         <input type="text" class="form-control" id="city" placeholder="e.g Capetown" required="">
       </div>
       <div class="form-group mx-sm-3 mb-2">
-        <label for="inputPassword2" class="">Period</label>
-        <input type="text" class="form-control" id="period" placeholder="e.g Tuesday" required="">
+        <label for="periods" class="">Period</label>
+        <select class="form-control">
+          {% for p in periods %}
+          <option value="{{p.id}}">{{p.period_name}}</option>
+          {% endfor %}
+        </select>
       </div>
       <button type="submit" class="btn btn-primary mb-2">Search</button>
     </form>

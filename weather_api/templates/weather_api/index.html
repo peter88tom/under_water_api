@@ -40,11 +40,65 @@
         </select>
       </div>
       <button type="submit" class="btn btn-primary mb-2">Search</button>
+      <button class="btn btn-dark buttonprocessing" type="button" disabled style="display: none;">
+      <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+      processing...
+      </button>
     </form>
        </div>
        <div class="col-2"></div>
      </div>
 
+ 
+
+
+      <div class="row">
+       <div class="col-2"></div>
+       <div class="col-8">
+         <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Handle</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>
+            <tr>
+              <th scope="row">2</th>
+              <td>Jacob</td>
+              <td>Thornton</td>
+              <td>@fat</td>
+            </tr>
+            <tr>
+              <th scope="row">3</th>
+              <td>Larry</td>
+              <td>the Bird</td>
+              <td>@twitter</td>
+            </tr>
+          </tbody>
+        </table>
+       </div>
+       <div class="col-2"></div>
+     
+      </div>
+
+     
+     <div class="row">
+       <div class="col-2"></div>
+       <div class="col-8">
+        <h2>Bar Graph</h2>
+        <canvas id="myChart"></canvas> 
+       </div>
+       <div class="col-2"></div>
+     </div>
 
 
       <footer class="my-5 pt-5 text-muted text-center text-small">
@@ -66,11 +120,25 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.min.js"></script>
+    
     <script type="text/javascript">
       
   $("#WeatherForm").on('submit', function(e){
       e.preventDefault();
+
+      var form = $(this);
+      
+      $(document).ajaxSend(function(){
+         form.find(':submit').hide();
+         form.find('.buttonprocessing').show();
+      });
+
+       $(document).ajaxComplete(function(){
+         form.find(':submit').show();
+         form.find('.buttonprocessing').hide();
+      });
+
 
       $.ajax({ 
                 data: $(this).serialize(), 
@@ -84,6 +152,54 @@
             return false;
 
     });
+  
+
+
+   // Graphs
+  var ctx = document.getElementById('myChart');
+  // eslint-disable-next-line no-unused-vars
+  var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday'
+      ],
+      datasets: [{
+        data: [
+          15339,
+          21345,
+          18483,
+          24003,
+          23489,
+          24092,
+          12034
+        ],
+        lineTension: 0,
+        backgroundColor: 'transparent',
+        borderColor: '#007bff',
+        borderWidth: 4,
+        pointBackgroundColor: '#007bff'
+      }]
+    },
+    options: {
+      scales: {
+        yAxes: [{
+          ticks: {
+            beginAtZero: false
+          }
+        }]
+      },
+      legend: {
+        display: false
+      }
+    }
+  })
 
     </script>
   </body

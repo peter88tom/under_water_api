@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
     <title>API</title>
+    <style type="text/css">
+      span{
+        font-size: 13px;
+        font-weight: 300px;
+      }
+    </style>
   </head>
   <body>
     
@@ -39,7 +45,7 @@
           {% endfor %}
         </select>
       </div>
-      <button type="submit" class="btn btn-primary mb-2">Search</button>
+      <button type="submit" class="btn btn-primary mb-2">Get Forecast</button>
       <button class="btn btn-dark buttonprocessing" type="button" disabled style="display: none;">
       <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
       processing...
@@ -53,13 +59,13 @@
 
      <br>
       <div class="row">
-       <div class="col-2"></div>
-       <div class="col-8">
+       <div class="col-1"></div>
+       <div class="col-9">
         
         <div class="card">
           <div class="card-body">
             <div class="media">
-              <img class="mr-3" id="weather_icon"  alt="" style="width: 50px; height: 50px;">
+              <img class="mr-3" id="weather_icon"  src="https://img.icons8.com/cute-clipart/2x/cloud.png" alt="img" style="width: 50px; height: 50px;">
               <div class="media-body">
                 <h2 class="mt-0" id="city_name"></h2>
                  <span id="min_temp"></span> &nbsp;&nbsp;&nbsp;&nbsp;<span id="max_temp"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="av_temp"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="mean_temp"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="humidity"></span>
@@ -70,7 +76,7 @@
         <br>
 
        </div>
-       <div class="col-2"></div>
+       <div class="col-1"></div>
      
       </div>
 
@@ -129,7 +135,7 @@
                 type: $(this).attr('method'), 
                 url:  $(this).attr('action'), 
                 success: function(data) {
-                  console.log(data['city'])
+                  console.log(data)
                  
                   var icon ='';
                   var city = '';
@@ -139,6 +145,7 @@
                   var median_temp = 0.00;
                   var humidity = 0.00;
                  
+                 var graph_data = [data['min_temp'],data['max_temp'],data['average_temp'],data['median_temp'],data['humidity']];
                  
                   $(document).find("#city_name").html(data['city']);
                   $(document).find("#min_temp").html("Min Temp: "+data['min_temp']);
@@ -147,6 +154,8 @@
                   $(document).find("#mean_temp").html("Median Temp: "+data['median_temp']);
                   $(document).find("#humidity").html("Humidity: "+data['humidity']);
                   $(document).find("#weather_icon").attr("src",data['icon']+'.png');
+
+                  GrapFunction(graph_data);
                 }
             });
             return false;
@@ -155,36 +164,32 @@
   
 
 
-   // Graphs
+
+function GrapFunction(graph_data){
+
+
+     // Graphs
   var ctx = document.getElementById('myChart');
   // eslint-disable-next-line no-unused-vars
   var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
       labels: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday'
+        'Min Temp',
+        'Max Temp',
+        'Average Temp',
+        'Median Temp',
+        'Humidity',
+        
       ],
       datasets: [{
-        data: [
-          15339,
-          21345,
-          18483,
-          24003,
-          23489,
-          24092,
-          12034
-        ],
+        data:graph_data,
         lineTension: 0,
-        backgroundColor: 'transparent',
-        borderColor: '#007bff',
-        borderWidth: 4,
-        pointBackgroundColor: '#007bff'
+        backgroundColor: 'rgba(0, 255, 0, 0.3)',
+        borderColor: 'rgba(0, 255, 0, 0.3)',
+        borderWidth: 0,
+        pointBackgroundColor: '#007bff',
+        
       }]
     },
     options: {
@@ -200,6 +205,17 @@
       }
     }
   })
+}
 
+
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 5; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
     </script>
   </body

@@ -20,6 +20,8 @@ def get_weather(request):
 
 		# Calculate average and medium templature using max and min temp, will be using Numpy as it has this functions
 		np_average = np.arange(resp['main']['temp_min'],resp['main']['temp_max'])
+
+		
 		
 		# mean
 		temp_average = np.average(np_average)
@@ -41,6 +43,18 @@ def get_weather(request):
 			'icon':'http://openweathermap.org/img/w/'+resp['weather'][0]['icon'],
 			'description':resp['weather'][0]['description'],
 			}
+
+
+		# query_result = {
+		# 	'city':city,
+		# 	'min_temp':'250.0',
+		# 	'max_temp':'450.0',
+		# 	'average_temp' :'200.0',
+		# 	'median_temp' :'167.0',
+		# 	'humidity':'300.0',
+		# 	'icon':'http://openweathermap.org/img/w/',
+		# 	'description':'something',
+		# }
 		
 		return JsonResponse(query_result)
 	else:

@@ -148,11 +148,12 @@
                  var graph_data = [data['min_temp'],data['max_temp'],data['average_temp'],data['median_temp'],data['humidity']];
                  
                   $(document).find("#city_name").html(data['city']);
-                  $(document).find("#min_temp").html("Min Temp: "+data['min_temp']);
-                  $(document).find("#max_temp").html("Max Temp: "+data['max_temp']);
-                  $(document).find("#av_temp").html("Average Temp: "+data['average_temp']);
-                  $(document).find("#mean_temp").html("Median Temp: "+data['median_temp']);
-                  $(document).find("#humidity").html("Humidity: "+data['humidity']);
+             
+                  $(document).find("#min_temp").html("Min Temp: "+data['min_temp']+'&#176;F');
+                  $(document).find("#max_temp").html("Max Temp: "+data['max_temp']+'&#176;F');
+                  $(document).find("#av_temp").html("Average Temp: "+data['average_temp']+'&#176;F');
+                  $(document).find("#mean_temp").html("Median Temp: "+data['median_temp']+'&#176;F');
+                  $(document).find("#humidity").html("Humidity: "+data['humidity']+'&#176;F');
                   $(document).find("#weather_icon").attr("src",data['icon']+'.png');
 
                   GrapFunction(graph_data);

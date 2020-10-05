@@ -15,7 +15,7 @@ def get_weather(request):
 		# posted data, fetch the weather from any api
 		# This Api can only return current weather of a given price
 		# Its possible to get the weather by 4,5,16 and 30 days but require purchase
-		resp=requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city+'&appid='+WEATHER_API_KEY1).json()
+		resp=requests.get('http://api.openweathermap.org/data/2.5/weather?q='+city+'&units=imperial&appid='+WEATHER_API_KEY1).json()
 		
 
 		# Calculate average and medium templature using max and min temp, will be using Numpy as it has this functions

@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>API</title>
+  </head>
+  <body>
+    
+
+
+    <div class="container">
+      <div class="py-5 text-center">
+       
+        <h2>WEATHER API<hr></h2>
+         
+      </div>
+
+
+     <div class="row">
+       <div class="col-2"></div>
+       <div class="col-8">
+         <form class="form-inline" action="{% url 'default-page' %}" method="POST" id="WeatherForm">
+      {% csrf_token %}
+      <div class="form-group mb-2">
+        <label for="staticEmail2" class="">City</label>
+        <input type="text" class="form-control" id="city" placeholder="e.g Capetown" required="">
+      </div>
+      <div class="form-group mx-sm-3 mb-2">
+        <label for="inputPassword2" class="">Period</label>
+        <input type="text" class="form-control" id="period" placeholder="e.g Tuesday" required="">
+      </div>
+      <button type="submit" class="btn btn-primary mb-2">Search</button>
+    </form>
+       </div>
+       <div class="col-2"></div>
+     </div>
+
+
+
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">© 2017-2018 Company Name</p>
+        <ul class="list-inline">
+          <li class="list-inline-item"><a href="#">Privacy</a></li>
+          <li class="list-inline-item"><a href="#">Terms</a></li>
+          <li class="list-inline-item"><a href="#">Support</a></li>
+        </ul>
+      </footer>
+    </div>
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+    <script type="text/javascript">
+      
+  $("#WeatherForm").on('submit', function(e){
+      e.preventDefault();
+
+      $.ajax({ 
+                data: $(this).serialize(), 
+                type: $(this).attr('method'), 
+                url:  $(this).attr('action'), 
+                success: function(data) {
+                 
+
+                }
+            });
+            return false;
+
+    });
+
+    </script>
+  </body

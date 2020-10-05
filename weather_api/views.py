@@ -38,7 +38,7 @@ def get_weather(request):
 			'average_temp' :temp_average,
 			'median_temp' :temp_median,
 			'humidity':resp['main']['humidity'],
-			'icon':resp['weather'][0]['icon'],
+			'icon':'http://openweathermap.org/img/w/'+resp['weather'][0]['icon'],
 			'description':resp['weather'][0]['description'],
 			}
 		

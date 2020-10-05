@@ -49,7 +49,7 @@
        <div class="col-2"></div>
      </div>
 
- 
+     
 
      <br>
       <div class="row">
@@ -58,7 +58,13 @@
         
         <div class="card">
           <div class="card-body">
-            <div class="col-1"><i class="fa fa-trash"></i></div>
+            <div class="media">
+              <img class="mr-3" id="weather_icon"  alt="" style="width: 50px; height: 50px;">
+              <div class="media-body">
+                <h2 class="mt-0" id="city_name"></h2>
+                 <span id="min_temp"></span> &nbsp;&nbsp;&nbsp;&nbsp;<span id="max_temp"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="av_temp"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="mean_temp"></span>&nbsp;&nbsp;&nbsp;&nbsp;<span id="humidity"></span>
+              </div>
+            </div>
           </div>
         </div>
         <br>
@@ -123,8 +129,24 @@
                 type: $(this).attr('method'), 
                 url:  $(this).attr('action'), 
                 success: function(data) {
+                  console.log(data['city'])
                  
-                  console.log(data);
+                  var icon ='';
+                  var city = '';
+                  var min_temp=0.00;
+                  var max_temp=0.00;
+                  var av_temp =0.00;
+                  var median_temp = 0.00;
+                  var humidity = 0.00;
+                 
+                 
+                  $(document).find("#city_name").html(data['city']);
+                  $(document).find("#min_temp").html("Min Temp: "+data['min_temp']);
+                  $(document).find("#max_temp").html("Max Temp: "+data['max_temp']);
+                  $(document).find("#av_temp").html("Average Temp: "+data['average_temp']);
+                  $(document).find("#mean_temp").html("Median Temp: "+data['median_temp']);
+                  $(document).find("#humidity").html("Humidity: "+data['humidity']);
+                  $(document).find("#weather_icon").attr("src",data['icon']+'.png');
                 }
             });
             return false;
